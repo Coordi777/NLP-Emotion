@@ -10,40 +10,12 @@
 
 ​	循环神经网络（Recurrent Neural Network，RNN）与卷积神经网络不同，它是一种运算单元被循环使用的神经网络。对于一种语言来讲，其内容与上下文有关，一个词在不同的语境下会有不同的含义，而且输入的顺序也对结果有很大影响，即其结果不仅依赖于当前情况，而且与过去的情况有关。因此，对于NLP问题，选择带有记忆能力的神经网络效果会更好，本实验选择以GRU神经网络为基础进行实验。
 
-​	循环门控制单元网络（Gate Recurrent Unit，GRU），通过将遗忘门和输入门组合在一起，从而减少了门的数量，在保证记忆能力的同时，提升了网络的训练效率。在网络中每个GRU单元的示意图如图所示：
-
-<img src="C:\Users\l\AppData\Roaming\Typora\typora-user-images\image-20210515172500521.png" alt="image-20210515172500521" style="zoom:100%;" />
-
-​	在该网络中，每个GRU单元针对输入进行下面的函数计算：
-$$
-r_{1}=\sigma (W_{ir}x_{t}+b_{ir}+W_{hr}h_{t-1}+b_{hr})
-$$
-
-$$
-z_{1}=\sigma (W_{iz}x_{t}+b_{iz}+W_{hz}h_{t-1}+b_{hn})
-$$
-
-$$
-n_{t}=\tanh (W_{in}x_{t}+b_{in}+r_{t}\times (W_{hn}h_{t-1}+b_{hr}))
-$$
-
-$$
-h_{t}=(1-z_{t})\times n_{t}+z_{t}\times h_{t-1}
-$$
-
-​	式中，h~1~是t时刻的隐藏状态；x~t~是t时刻的输入；h~t-1~是t-1时刻的隐藏状态，初始时刻的隐藏状态为0；r~t~、z~t~、n~t~分别为重置门、更新门、计算候选隐藏层；δ为sigmoid激活函数。每个单元的传递过程中，r~t~用来控制需要保留之前的记忆，若其为0，则n~t~只包含当前输入状态的信息，z~t~则控制前一段时刻的隐藏层遗忘的信息量。
-
 ## 介绍
 
 ### 1.数据集的准备
 
-​	从Kaggle网站上下载已经标注好的数据集，“IMDB Dataset.csv”作为训练集，“TEST.csv”作为测试集，两文件的内容概览如下：
-
-![image-20210515173553488](C:\Users\l\AppData\Roaming\Typora\typora-user-images\image-20210515173553488.png)
-
-![image-20210515173657732](C:\Users\l\AppData\Roaming\Typora\typora-user-images\image-20210515173657732.png)
-
-​	以上即为原始数据集，保存在与代码文件相同的目录下，以便后续调入使用。
+​	从Kaggle网站上下载已经标注好的数据集，“IMDB Dataset.csv”作为训练集，“TEST.csv”作为测试集
+​	以上即为原始数据集，保存在与代码文件相同的目录下，以便后续调入使用
 
 ### 2.导入模块
 
