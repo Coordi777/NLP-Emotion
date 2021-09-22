@@ -125,13 +125,6 @@ traindatasave.to_csv("imdb_train.csv", index=False)
 testdatasave.to_csv("imdb_test.csv", index=False)
 ```
 
-​	结果如下：
-
-![image-20210515184228337](C:\Users\l\AppData\Roaming\Typora\typora-user-images\image-20210515184228337.png)
-
-![image-20210515184140609](C:\Users\l\AppData\Roaming\Typora\typora-user-images\image-20210515184140609.png)
-
-
 
 ### 4.分词与加权
 
